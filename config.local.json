@@ -3,7 +3,7 @@
         "user":"root",
         "password":"",
         "database":"vinfast",
-        "address":"" 
+        "address":"localhost:3306" 
     }
     
 }

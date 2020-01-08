@@ -12,20 +12,25 @@ func main() {
 
 	router := gin.Default()
 	// c := controller.NewController()
+	ginController := controller.NewController()
 
 	config := model.SetupConfig()
 	db := model.ConnectDb(config.Database.User, config.Database.Password, config.Database.Database, config.Database.Address)
 	defer db.Close()
 
-	// var mysql mysql.sql
+	ginController.DB = db
+	ginController.Config = config
+
+
+	
 
 	// //api USER
-	router.GET("/login", controller.Login)
+	router.GET("/login", ginController.Login)
 	// router.POST("/users", AddUser)
 
 	// //api vehicle
-	// router.GET("/listvehicle", ListVehicle)
-	// router.GET("/detailvehcle/:id", DetailVehicle)
+	 router.GET("/listvehicle",ginController.ListVehicle)
+	 router.GET("/detailvehicle/:id",ginController.DetailVehicle)
 	// router.PUT("/vehicle/status/", VehicleStatus)
 
 	// //api booking
@@ -34,5 +39,5 @@ func main() {
 	// //api wallet
 	// router.PUT("/wallet/point/:id", Point)
 
-	router.Run("0.0.0.0:8089")
+	router.Run(":8089")
 }

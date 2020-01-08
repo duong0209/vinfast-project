@@ -18,16 +18,15 @@ type User struct {
 type Vehicle struct {
 	ID     int
 	Name   string
+	Type   string
 	Status bool
-}
-
-type VehicalType struct {
-	ID          int
-	Name        string
 	Description string
 	Images      string
 	DailyPrice  int
 }
+
+
+
 
 type Booking struct {
 	ID        int

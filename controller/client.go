@@ -1,13 +1,14 @@
 package controller
 
 import (
-	"vinfast-project/database"
+	//"vinfast-project/database"
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"vinfast-project/model"
+	"log"
 )
 
-func Login(c *gin.Context) {
+func (gc *Controller)Login(c *gin.Context) {
 	var user model.User
 	var Res interface{}
 	if err := c.BindJSON(&user); err != nil {
@@ -19,84 +20,43 @@ func Login(c *gin.Context) {
 		return	
 	}
 
-	if err := database.AddUser(user); err != nil {
-		c.JSON(400, Res)
-	} else {
-		c.JSON(200, Res)
-	}
-
-
-func  GetItems(c *gin.Context) {
-		var Vehicle []model.Vehicle
-		var itemDao database.ItemDao
-		itemDao = controller.dao
-		items, err := itemDao.FetchItems()
-		if err != nil {
-			c.JSON(http.StatusInternalServerError, utility.MakeResponse(500, "Internal server error!", nil))
-			return
-		}
-		c.JSON(http.StatusOK, utility.MakeResponse(200, "Request successful", items))
-	
-	
-	
-	
 	
 
-
-	// if user2, err := mysql.GetUserFromUP(user.ID); err != nil {
-	// 	c.JSON(400, Res)
-	// } else {
-	// 	c.JSON(200, user2)
-	// }
 }
 
-// AddUser add a user into database
-func AddUser(c *gin.Context) {
-	var user model.User
-	var Res interface{}
-	if err := c.BindJSON(&user); err != nil {
-		c.JSON(400, Res)
+
+func (gc *Controller)ListVehicle(c *gin.Context) {
+	var vehicle []model.Vehicle
+	errGetVehicle := gc.DB.Raw(`
+		SELECT id, name, images , status
+		 FROM vehicle
+	`).Scan(&vehicle).Error
+	if errGetVehicle != nil {
+		log.Println(errGetVehicle)
+		
+			
 		return
 	}
-	c.JSON(200, nil)
-	return
-	// if err := mysql.AddUser(user); err != nil {
-	// 	c.JSON(400, Res)
-	// } else {
-	// 	c.JSON(200, Res)
-	// }
-}
+	c.JSON(200, vehicle)
+}	
 
-//  point into wallet
 
-func EditWallet(c *gin.Context) {
-	var res interface{}
-	var OneWallet model.Wallet
-	if err := c.BindJSON(&OneWallet); err != nil {
-		c.JSON(400, res)
+func (gc *Controller)DetailVehicle(c *gin.Context) {
+	VehicleId := c.Param("id")
+
+	var detailvehicle model.Vehicle
+	//log.Println(VehicleId)
+	errGetDetailVehicle := gc.DB.Raw(`
+		SELECT * 
+		FROM vehicle
+		WHERE id = ?
+	`,  VehicleId).Scan(&detailvehicle).Error
+	if errGetDetailVehicle != nil {
+		log.Println(errGetDetailVehicle)
 		return
 	}
-	c.JSON(200, nil)
-	return
-	// if err := mysql.EditBill(OneWallet); err != nil {
-	// 	c.JSON(400, res)
-	// } else {
-	// 	c.JSON(200, res)
-	// }
+	//log.Println(detailvehicle)
+	 c.JSON(200, detailvehicle)
+
 }
 
-func VehicleList(c *gin.Context) {
-	var res interface{}
-	var OneVehicle model.Vehicle
-	if err := c.BindJSON(&OneVehicle); err != nil {
-		c.JSON(400, res)
-		return
-	}
-	c.JSON(200, nil)
-	return
-	// if err := mysql.Vehicle(OneVehicle); err != nil {
-	// 	c.JSON(400, res)
-	// } else {
-	// 	c.JSON(200, res)
-	// }
-}
