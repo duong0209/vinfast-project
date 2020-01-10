@@ -8,7 +8,7 @@ Các API:
  GET("/login) 
 
 * Vehicle
-1.API list các xe trong DB
+1.API list các xe thue duoc trong DB
 GET("/vehiclelist")
 2.API trả về chi tiết 1 xe
 GET("/vehicle/:id")

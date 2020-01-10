@@ -1,8 +1,8 @@
 package main
 
 import (
-	"vinfast-project/model"
 	"vinfast-project/controller"
+	"vinfast-project/model"
 
 	"github.com/gin-gonic/gin"
 	_ "github.com/go-sql-driver/mysql"
@@ -21,21 +21,17 @@ func main() {
 	ginController.DB = db
 	ginController.Config = config
 
-
-	
-
 	// //api USER
-	router.GET("/login", ginController.Login)
-	// router.POST("/users", AddUser)
+	router.POST("/login", ginController.Login)
+	router.GET("/userinfo/:id", ginController.UserInfo)
 
 	// //api vehicle
-	 router.GET("/listvehicle",ginController.ListVehicle)
-	 router.GET("/detailvehicle/:id",ginController.DetailVehicle)
-	// router.PUT("/vehicle/status/", VehicleStatus)
+	router.GET("/listvehicle", ginController.ListVehicle)
+	router.GET("/detailvehicle/:id", ginController.DetailVehicle)
 
 	// //api booking
-	// router.POST("/booking", Booking)
-
+	router.POST("/booking", ginController.Booking)
+	// router.POST("/checkout)",ginController.Checkout)
 	// //api wallet
 	// router.PUT("/wallet/point/:id", Point)
 

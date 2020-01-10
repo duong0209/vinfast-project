@@ -6,41 +6,55 @@ import (
 	"os"
 
 	"github.com/jinzhu/gorm"
-	"github.com/json-iterator/go"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
+	jsoniter "github.com/json-iterator/go"
 )
 
 type User struct {
-	ID   int `json:"user_id,omitempty"`
+	ID   int    `json:"id,omitempty"`
 	Name string `json:"user_name,omitempty"`
 }
-
+type UserInfo struct {
+	ID       int
+	UserName string `json:"user_name"`
+	Wallet   int    `json:"wallet"`
+}
 type Vehicle struct {
-	ID     int
-	Name   string
-	Type   string
-	Status bool
-	Description string
-	Images      string
-	DailyPrice  int
+	ID          int      `json:"ID"`
+	Name        string   `json:"Name"`
+	Type        string   `json:"Type"`
+	Status      string   `json:"Status"`
+	Description string   `json:"Description"`
+	Image       string   `json:"Image"`
+	ImageList   []string `json:"image_list"`
+	DailyPrice  int      `json:"DailyPrice"`
 }
 
-
-
-
 type Booking struct {
-	ID        int
-	IDVehical int
-	IDUser    int
-	TotalCost int
-	StartDate int
-	EndDate   int
+	ID        int `json:"id"`
+	IDVehical int `json:"vehicle_id"`
+	IDUser    int `json:"user_id"`
+	TotalCost int `json:"total_cost"`
+	StartDate int `json:"start_date"`
+	EndDate   int `json:"end_date"`
 }
 
 type Wallet struct {
-	ID     int
-	IDUser int
-	Point  int
+	IDWallet int
+	IDUser   int
+	Money    int
+}
+
+type UserJSON struct {
+	ID       int    `json:"id"`
+	UserName string `json:"name"`
+}
+
+type BookingJSON struct {
+	IdUser    int `json:"iduser"`
+	VehicleID int `json:"vehicleid"`
+	StartDate int `json:"startdate"`
+	EndDate   int `json:"enddate"`
 }
 
 type Config struct {
