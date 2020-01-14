@@ -1,19 +1,10 @@
 Đề tài: thuê xe tự lái VinFast
 
+API doc : https://docs.google.com/spreadsheets/d/1UcbuRxgBHAZdIqcu_JjpxGSzCyx9Pt9lUKSSiqUQWw8/edit?usp=sharing
 
 
-Các API:
-* User
-1.API đăng nhập người dùng 
- GET("/login) 
 
-* Vehicle
-1.API list các xe thue duoc trong DB
-GET("/vehiclelist")
-2.API trả về chi tiết 1 xe
-GET("/vehicle/:id")
 
-* booking
-1.API lấy id xe thuê
+
 
 
