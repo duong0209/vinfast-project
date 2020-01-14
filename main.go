@@ -24,6 +24,7 @@ func main() {
 	// //api USER
 	router.POST("/login", ginController.Login)
 	router.GET("/userinfo/:id", ginController.UserInfo)
+	router.POST("/topup",ginController.TopUpWallet)
 
 	// //api vehicle
 	router.GET("/listvehicle", ginController.ListVehicle)
@@ -31,9 +32,8 @@ func main() {
 
 	// //api booking
 	router.POST("/booking", ginController.Booking)
-	// router.POST("/checkout)",ginController.Checkout)
-	// //api wallet
-	// router.PUT("/wallet/point/:id", Point)
+	
+	
 
 	router.Run(":8089")
 }

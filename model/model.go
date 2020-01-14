@@ -17,7 +17,8 @@ type User struct {
 type UserInfo struct {
 	ID       int
 	UserName string `json:"user_name"`
-	Wallet   int    `json:"wallet"`
+	Wallet   Wallet    `json:"wallet"`
+	
 }
 type Vehicle struct {
 	ID          int      `json:"ID"`
@@ -40,9 +41,9 @@ type Booking struct {
 }
 
 type Wallet struct {
-	IDWallet int
-	IDUser   int
-	Money    int
+	IDWallet int `json:"id"`
+	IDUser   int `json:"user_id"`
+	Money    int `json:"money"`
 }
 
 type UserJSON struct {
@@ -51,10 +52,15 @@ type UserJSON struct {
 }
 
 type BookingJSON struct {
-	IdUser    int `json:"iduser"`
+	UserID    int `json:"iduser"`
 	VehicleID int `json:"vehicleid"`
 	StartDate int `json:"startdate"`
 	EndDate   int `json:"enddate"`
+}
+
+type TopUpWalletJSON struct {
+	UserID int `json:"userid"`
+	Amount	int `json:"amount"`
 }
 
 type Config struct {
@@ -109,4 +115,24 @@ func ConnectDb(user string, password string, database string, address string) *g
 		panic(err)
 	}
 	return db
+}
+
+
+type Meta struct {
+	Code    int
+	Message string
+}
+type Respond struct {
+	Data interface{}
+	Meta Meta
+}
+
+func MakeRespond(data interface{}, code int, msg string) Respond {
+	return Respond{
+		Data: data,
+		Meta: Meta{
+			Code:    code,
+			Message: msg,
+		},
+	}
 }
