@@ -1,9 +1,9 @@
 {
     "database":{
-        "user":"root",
-        "password":"",
+        "user":"duongnt28",
+        "password":"0902046893",
         "database":"vinfast",
-        "address":"localhost:3306" 
+        "address":"db4free.net" 
     }
     
 }
