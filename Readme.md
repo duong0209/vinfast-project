@@ -3,6 +3,14 @@
 ## API doc 
  https://docs.google.com/spreadsheets/d/1UcbuRxgBHAZdIqcu_JjpxGSzCyx9Pt9lUKSSiqUQWw8/edit?usp=sharing
 
+## Các công cụ được sử dụng của project
+ - BackEnd: Golang
+ - Version control: git
+ - Database: mysql, phpmyadmin
+ - Gin-gonic : https://github.com/gin-gonic
+ - IDE : Visual Studio Code
+ - Testing: Postman: https://www.getpostman.com/
+
 ## Usecase
 
 ![alt text](https://raw.githubusercontent.com/duong0209/vinfast-project/master/Image/Usecase.png)

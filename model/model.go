@@ -18,6 +18,7 @@ type UserInfo struct {
 	ID       int
 	UserName string `json:"user_name"`
 	Wallet   Wallet    `json:"wallet"`
+	Bill     Booking  `json:"bill`
 	
 }
 type Vehicle struct {
@@ -33,7 +34,7 @@ type Vehicle struct {
 
 type Booking struct {
 	ID        int `json:"id"`
-	IDVehical int `json:"vehicle_id"`
+	IDVehicle int `json:"vehicle_id"`
 	IDUser    int `json:"user_id"`
 	TotalCost int `json:"total_cost"`
 	StartDate int `json:"start_date"`

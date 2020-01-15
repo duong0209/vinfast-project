@@ -67,6 +67,7 @@ func (gc *Controller) UserInfo(c *gin.Context) {
 		c.JSON(400, model.MakeRespond(nil, 400, "Loi lay thong tin user"))
         return
 	}
+	// lay wallet
 	errGetWallet := gc.DB.Raw(`
 		SELECT wallet.id as id_wallet, wallet.user_id as id_user, wallet.money as money
 		FROM wallet
@@ -75,6 +76,23 @@ func (gc *Controller) UserInfo(c *gin.Context) {
 	if errGetWallet != nil {
 		log.Println(errGetWallet)
 		c.JSON(400, model.MakeRespond(nil, 400, "Loi lay thong tin vi"))
+
+		return
+	}
+    // lay thong tin dat xe
+	errGetBill := gc.DB.Raw(`
+		SELECT booking.id as id , booking.user_id as id_user , booking.vehicle_id as id_vehicle ,
+		       booking.total_cost as total_cost , booking.start_date as start_date , booking.end_date as end_date
+		FROM booking 
+		WHERE user_id = ?
+	`, UserID).Scan(&userinfo.Bill).Error
+	if errGetBill != nil {
+		if errGetBill.Error() == "record not found"{
+			c.JSON(200, model.MakeRespond(userinfo, 200, "Chua dat xe nao"))
+			return
+		}
+		log.Println(errGetBill)
+		c.JSON(400, model.MakeRespond(nil, 400, "Loi lay thong tin dat xe"))
 
 		return
 	}
